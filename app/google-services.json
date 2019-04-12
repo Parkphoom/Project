@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "619727494868",
+    "firebase_url": "https://parkphoom-73708.firebaseio.com",
+    "project_id": "parkphoom-73708",
+    "storage_bucket": "parkphoom-73708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619727494868:android:13c3c6a65bcbec53",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619727494868-pu5tpmq3tmebq7uf6v3etdois3eon3le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAptGRMaL-1_GNS9fOKf2uZ4yTI4q3AEPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619727494868-pu5tpmq3tmebq7uf6v3etdois3eon3le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619727494868:android:052404b07785bdc2",
+        "android_client_info": {
+          "package_name": "com.example.testdialogflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619727494868-pu5tpmq3tmebq7uf6v3etdois3eon3le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAptGRMaL-1_GNS9fOKf2uZ4yTI4q3AEPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619727494868-pu5tpmq3tmebq7uf6v3etdois3eon3le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
