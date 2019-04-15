@@ -17,37 +17,25 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.api.gax.core.FixedCredentialsProvider;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2beta1.DetectIntentResponse;
-import com.google.cloud.dialogflow.v2beta1.QueryInput;
 import com.google.cloud.dialogflow.v2beta1.SessionName;
 import com.google.cloud.dialogflow.v2beta1.SessionsClient;
-import com.google.cloud.dialogflow.v2beta1.SessionsSettings;
-import com.google.cloud.dialogflow.v2beta1.TextInput;
-import com.google.gson.JsonElement;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import ai.api.AIServiceContext;
 import ai.api.AIServiceContextBuilder;
 import ai.api.android.AIConfiguration;
 import ai.api.android.AIDataService;
-import ai.api.model.AIEvent;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
-import ai.api.model.ResponseMessage;
 
-public class MainActivity extends AppCompatActivity {
+public class MainChat extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainChat.class.getSimpleName();
     private static final int USER = 1;
     private static final int BOT = 2;
+    int countBoredWord = 0;
 
     private String uuid = UUID.randomUUID().toString();
     private LinearLayout chatLayout;
@@ -58,10 +46,17 @@ public class MainActivity extends AppCompatActivity {
     private AIDataService aiDataService;
     private AIServiceContext customAIServiceContext;
 
-    // Java V2
+//     Java V2
     private SessionsClient sessionsClient;
     private SessionName session;
 
+    //Client access token
+    private String NewAgent = "d8b39ac31def4f289e2c058bcf4c29f1";
+    private String AgentforTest = "6dd62d5eb4bc416f9cd2927a0db632bd";
+    private String ApiToken ="";
+    //     howto change ApiToken
+    //    //           ApiToken = AgentforTest;
+    //    //            initChatbot();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         chatLayout = findViewById(R.id.chatLayout);
 
+
+
         ImageView sendBtn = findViewById(R.id.sendBtn);
         sendBtn.setOnClickListener(this::sendMessage);
-        start();
+
 
         queryEditText = findViewById(R.id.queryEditText);
         queryEditText.setOnKeyListener((view, keyCode, event) -> {
@@ -91,42 +88,50 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Android client
+        ApiToken = NewAgent;
        initChatbot();
-
+        start();
         // Java V2
         //initV2Chatbot();
 
 
     }
 
+
     private void start(){
-        AlertDialog.Builder alertdialogBulider = new AlertDialog.Builder(MainActivity.this);
-        alertdialogBulider
-                .setMessage("มาเริ่มกันเลยมั้ย")
-                .setCancelable(false)
-                .setPositiveButton("ตกลง",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                    String msg = "มาเริ่มกันเลยยยยย";
+//        AlertDialog.Builder alertdialogBulider = new AlertDialog.Builder(MainChat.this);
+//        alertdialogBulider
+//                .setMessage("มาเริ่มกันเลยมั้ย")
+//                .setCancelable(false)
+//                .setPositiveButton("ตกลง",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                    String msg = "มาเริ่มกันเลยยยยย";
+//                                        showTextView(msg, USER);
+//                                        queryEditText.setText("");
+//                                        // Android client
+//                                        aiRequest.setQuery(msg);
+//                                        RequestTask requestTask = new RequestTask(MainChat.this, aiDataService, customAIServiceContext);
+//                                        requestTask.execute(aiRequest);
+//
+//
+//
+//                            }
+//                        });
+//        AlertDialog alertDialog = alertdialogBulider.create();
+//        alertDialog.show();
 
-                                        showTextView(msg, USER);
-                                        queryEditText.setText("");
-                                        // Android client
-                                        aiRequest.setQuery(msg);
-                                        RequestTask requestTask = new RequestTask(MainActivity.this, aiDataService, customAIServiceContext);
-                                        requestTask.execute(aiRequest);
-
-
-
-                            }
-                        });
-        AlertDialog alertDialog = alertdialogBulider.create();
-        alertDialog.show();
+        String msg = "Mi4lko6";
+        queryEditText.setText("");
+        // Android client
+        aiRequest.setQuery(msg);
+        RequestTask requestTask = new RequestTask(MainChat.this, aiDataService, customAIServiceContext);
+        requestTask.execute(aiRequest);
     }
 
     private void initChatbot(){
-        final AIConfiguration config = new AIConfiguration("d8b39ac31def4f289e2c058bcf4c29f1",
+        final AIConfiguration config = new AIConfiguration(ApiToken,
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
         aiDataService = new AIDataService(this,config);
@@ -156,19 +161,19 @@ public class MainActivity extends AppCompatActivity {
         String msg = queryEditText.getText().toString();
 
         if (msg.trim().isEmpty()) {
-            Toast.makeText(MainActivity.this, "พิมพ์อะไรสักหน่อยซิ!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainChat.this, "พิมพ์อะไรสักหน่อยซิ!", Toast.LENGTH_LONG).show();
         } else {
             showTextView(msg, USER);
             queryEditText.setText("");
             // Android client
             aiRequest.setQuery(msg);
-            RequestTask requestTask = new RequestTask(MainActivity.this, aiDataService, customAIServiceContext);
+            RequestTask requestTask = new RequestTask(MainChat.this, aiDataService, customAIServiceContext);
             requestTask.execute(aiRequest);
 
 
             // Java V2
             //QueryInput queryInput = QueryInput.newBuilder().setText(TextInput.newBuilder().setText(msg).setLanguageCode("en-US")).build();
-            //new RequestJavaV2Task(MainActivity.this, session, sessionsClient, queryInput).execute();
+            //new RequestJavaV2Task(MainChat.this, session, sessionsClient, queryInput).execute();
         }
     }
 
@@ -178,12 +183,14 @@ public class MainActivity extends AppCompatActivity {
             String botReply = aiResponse.getResult().getFulfillment().getSpeech();
 //            String botReply2 = aiResponse.getResult().getMetadata().getIntentName();
             String botReplyDisplay = aiResponse.getResult().getMetadata().getIntentName();
-
-//               Toast.makeText(MainActivity.this, String.valueOf(botReply2), Toast.LENGTH_LONG).show();
+//               Toast.makeText(MainChat.this, ApiToken, Toast.LENGTH_LONG).show();
 
             Log.d(TAG, "Bot Reply: " + botReply);
             showTextView(botReply, BOT);
 
+            if(String.valueOf(aiResponse.getResult().getMetadata().getIntentName()).equals("detect_เบื่อ")){
+                detectBoredWord();
+            }
         } else {
             Log.d(TAG, "Bot Reply: Null");
             showTextView("There was some communication issue. Please Try again!", BOT);
@@ -226,15 +233,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void detectBoredWord(){
+
+        countBoredWord++;
+        if(countBoredWord == 5){
+            countBoredWord = 0;
+
+            AlertDialog.Builder alertdialogBulider = new AlertDialog.Builder(MainChat.this);
+              alertdialogBulider
+                .setMessage("คุณอายุต่ำกว่า 19 ใช่หรือไม่")
+                .setCancelable(false)
+                      .setPositiveButton("ใช่",
+                              new DialogInterface.OnClickListener() {
+                                  @Override
+                                  public void onClick(DialogInterface dialog, int which) {
+                                      Intent i = new Intent(MainChat.this,MainQuiz9.class);
+                                      startActivity(i);
+                                  }
+                              })
+                      .setNegativeButton("ไม่ใช่", null);
+        AlertDialog alertDialog = alertdialogBulider.create();
+        alertDialog.show();
+        }
+    }
+
 
 
     FrameLayout getUserLayout() {
-        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(MainChat.this);
         return (FrameLayout) inflater.inflate(R.layout.user_msg_layout, null);
     }
 
     FrameLayout getBotLayout() {
-        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(MainChat.this);
         return (FrameLayout) inflater.inflate(R.layout.bot_msg_layout, null);
     }
 

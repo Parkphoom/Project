@@ -2,6 +2,8 @@ package com.example.testdialogflow;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.example.testdialogflow.MainChat;
+
 import ai.api.AIServiceContext;
 import ai.api.AIServiceException;
 import ai.api.android.AIDataService;
@@ -32,6 +34,6 @@ public class RequestTask extends AsyncTask<AIRequest, Void, AIResponse>{
 
     @Override
     protected void onPostExecute(AIResponse aiResponse) {
-        ((MainActivity)activity).callback(aiResponse);
+        ((MainChat)activity).callback(aiResponse);
     }
 }

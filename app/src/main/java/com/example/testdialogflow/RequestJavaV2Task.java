@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.example.testdialogflow.MainChat;
 import com.google.cloud.dialogflow.v2beta1.DetectIntentRequest;
 import com.google.cloud.dialogflow.v2beta1.DetectIntentResponse;
 import com.google.cloud.dialogflow.v2beta1.QueryInput;
@@ -40,7 +41,7 @@ public class RequestJavaV2Task extends AsyncTask<Void, Void, DetectIntentRespons
 
     @Override
     protected void onPostExecute(DetectIntentResponse response) {
-        ((MainActivity) activity).callbackV2(response);
+        ((MainChat) activity).callbackV2(response);
     }
 
 }
