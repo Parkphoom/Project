@@ -29,11 +29,11 @@ public class MainMaplist extends AppCompatActivity {
             ,"เวลา 10.00–12.00 น.","เวลา 16.30-20.00 น."
     };
     Double[] LatHospital = new Double[]{
-            14.072724,13.780861,13.746499
+            14.072724,13.746499,13.780861
     } ;
 
     Double[] LngHospital = new Double[]{
-            100.613789, 100.509232 ,100.508699
+            100.613789, 100.509232,100.508699
     } ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,8 @@ public class MainMaplist extends AppCompatActivity {
         LatLngHospital.put(14.072724,100.613789);
         LatLngHospital.put(13.746499,100.509232);
         LatLngHospital.put(13.780861,100.508699);
+
+
 
         List<HashMap<String,String>> listItem = new ArrayList<>();
         SimpleAdapter adapter = new SimpleAdapter(this,listItem,R.layout.list_map,
